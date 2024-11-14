@@ -1,0 +1,28 @@
+<!-- public/users.html -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+</head>
+<body>
+    <h1>Lista de Usuários</h1>
+    <ul id="user-list"></ul>
+
+    <script>
+        // Usando Fetch API para buscar a lista de usuários
+        fetch('/api/users')
+            .then(response => response.json())
+            .then(data => {
+                const userList = document.getElementById('user-list');
+                data.forEach(user => {
+                    const li = document.createElement('li');
+                    li.textContent = `${user.name} - ${user.email}`;
+                    userList.appendChild(li);
+                });
+            })
+            .catch(err => console.error('Error fetching users:', err));
+    </script>
+</body>
+</html>
