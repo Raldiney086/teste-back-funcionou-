@@ -1,9 +1,10 @@
+//Chmando as bibliotecas como requisição
 const express = require('express');
 const bodyParser = require('body-parser');
 const { Pool } = require('pg');
 const path = require('path');
 
-// Configuração do banco de dados PostgreSQL
+// Conexão com o BD
 const pool = new Pool({
     user: 'postgres',
     host: 'localhost',
@@ -12,8 +13,10 @@ const pool = new Pool({
     port: 5432,
 });
 
+//Definir porta
 const port = 3000
 
+//Middleware => pega as informações do html 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 
