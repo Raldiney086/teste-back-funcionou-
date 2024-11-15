@@ -13,22 +13,22 @@ const pool = new Pool({
     port: 5432,
 });
 
-//Definir porta
+//Definir a porta para rodar o servidor
 const port = 3000
 
 //Middleware => pega as informações do html 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
+//Para puxar a requsicão do html
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'forms.html'));
 });
 
-// Servir arquivos estáticos da pasta "public"
+// Para puxar arquivos do html
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Rota de cadastro
+// Rota para cadastrar usuarios
 app.post('/register', async (req, res) => {
     const { name, email, password, cpf, endereco } = req.body;
 
@@ -40,12 +40,15 @@ app.post('/register', async (req, res) => {
 
         res.send('Usuário cadastrado com sucesso!');
     } catch (err) {
-        console.error(err);
+        console.error(err); //Se o cadastro já foi feito
         res.send('Erro ao cadastrar o usuário!');
     }
 });
 
+
+
 // Rota para exibir a página de lista de usuários
+/*
 app.get('/users', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'users.html'));
 });
@@ -59,10 +62,10 @@ app.get('/api/users', async (req, res) => {
         console.error(err);
         res.status(500).send('Error fetching users');
     }
-});
+});*/
 
 
-// Inicializando o servidor
+// Iniciar o servidor
 app.listen(3000, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);
 });
